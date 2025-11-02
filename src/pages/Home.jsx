@@ -6,6 +6,7 @@ import SearchBar from '../components/SearchBar';
 import SocialProof from '../components/SocialProof';
 import DestinationSection from '../components/DestinationSection';
 import HowItWorks from '../components/HowItWorks';
+import TrustIndicators from '../components/TrustIndicators'; // Add this import
 import AuthModal from '../components/AuthModal';
 
 function Home() {
@@ -75,8 +76,10 @@ function Home() {
             {/* How It Works Section */}
             <HowItWorks />
 
-            {/* Features Section */}
-            
+            {/* Trust Indicators Section */}
+            <TrustIndicators />
+
+
 
             {/* Auth Modal */}
             {showAuthModal && (
