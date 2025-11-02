@@ -8,6 +8,7 @@ import DestinationSection from '../components/DestinationSection';
 import HowItWorks from '../components/HowItWorks';
 import TrustIndicators from '../components/TrustIndicators'; // Add this import
 import AuthModal from '../components/AuthModal';
+import Testimonials from '../components/Testimonials'; // Add this import
 
 function Home() {
     const [showAuthModal, setShowAuthModal] = useState(false);
@@ -78,8 +79,9 @@ function Home() {
 
             {/* Trust Indicators Section */}
             <TrustIndicators />
-
-
+            
+            {/* Testimonials Section */}
+            <Testimonials />
 
             {/* Auth Modal */}
             {showAuthModal && (
