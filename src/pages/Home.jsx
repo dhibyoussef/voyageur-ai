@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
+import LiveStats from '../components/LiveStats';
 import Hero from '../components/Hero';
 import SearchBar from '../components/SearchBar';
+import SocialProof from '../components/SocialProof';
 import DestinationSection from '../components/DestinationSection';
 import HowItWorks from '../components/HowItWorks';
 import AuthModal from '../components/AuthModal';
@@ -23,7 +25,6 @@ function Home() {
 
     const handleSearch = (destination) => {
         console.log(`Searching for: ${destination}`);
-        // In a real app, this would trigger actual search
         alert(`Searching for destinations in ${destination}...`);
     };
 
@@ -35,7 +36,6 @@ function Home() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Load user preferences from localStorage (simulated)
     useEffect(() => {
         const prefs = localStorage.getItem('voyageur_preferences');
         if (prefs) {
@@ -45,9 +45,20 @@ function Home() {
 
     return (
         <div className="min-h-screen bg-white">
+            {/* Header */}
             <Header onOpenAuth={openAuthModal} />
+
+            {/* Live Statistics Bar */}
+            <LiveStats />
+
+            {/* Hero Section */}
             <Hero onOpenAuth={openAuthModal} />
+
+            {/* Search Bar */}
             <SearchBar onSearch={handleSearch} />
+
+            {/* Social Proof - Recent Bookings */}
+            <SocialProof />
 
             {/* Sticky Search Bar */}
             {stickySearch && (
@@ -64,7 +75,10 @@ function Home() {
             {/* How It Works Section */}
             <HowItWorks />
 
+            {/* Features Section */}
+            
 
+            {/* Auth Modal */}
             {showAuthModal && (
                 <AuthModal
                     mode={authMode}
