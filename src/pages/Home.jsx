@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import SearchBar from '../components/SearchBar';
 import DestinationSection from '../components/DestinationSection';
+import HowItWorks from '../components/HowItWorks';
 import AuthModal from '../components/AuthModal';
 
 function Home() {
@@ -60,43 +61,9 @@ function Home() {
             {/* Destination Section */}
             <DestinationSection userPreferences={userPreferences} />
 
-            {/* Demo Content for Other Sections */}
-            <section className="py-16 bg-gray-50">
-                <div className="max-w-7xl mx-auto px-4 text-center">
-                    <h2 className="text-4xl font-bold mb-4 text-gray-800">
-                        More Amazing Features Coming Soon
-                    </h2>
-                    <p className="text-xl text-gray-600 mb-8">
-                        AI-powered recommendations, smart search, and much more!
-                    </p>
+            {/* How It Works Section */}
+            <HowItWorks />
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                        <div className="bg-white rounded-2xl p-8 shadow-lg">
-                            <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-2xl flex items-center justify-center">
-                                <div className="icon-zap text-2xl text-purple-600"></div>
-                            </div>
-                            <h3 className="text-xl font-bold mb-2">Smart AI</h3>
-                            <p className="text-gray-600">Intelligent recommendations based on your travel style</p>
-                        </div>
-
-                        <div className="bg-white rounded-2xl p-8 shadow-lg">
-                            <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-2xl flex items-center justify-center">
-                                <div className="icon-shield text-2xl text-blue-600"></div>
-                            </div>
-                            <h3 className="text-xl font-bold mb-2">Best Prices</h3>
-                            <p className="text-gray-600">Price prediction and guarantee for the best deals</p>
-                        </div>
-
-                        <div className="bg-white rounded-2xl p-8 shadow-lg">
-                            <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-2xl flex items-center justify-center">
-                                <div className="icon-globe text-2xl text-green-600"></div>
-                            </div>
-                            <h3 className="text-xl font-bold mb-2">Global Coverage</h3>
-                            <p className="text-gray-600">150+ countries and thousands of destinations</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {showAuthModal && (
                 <AuthModal

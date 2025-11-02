@@ -140,7 +140,6 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                     </div>
                 </div>
 
-                {/* Right Side - Form */}
                 <div className="w-full md:w-1/2 p-10 overflow-y-auto max-h-[90vh] bg-gradient-to-br from-purple-50 to-blue-50">
                     {mode === 'login' ? (
                         <div>
