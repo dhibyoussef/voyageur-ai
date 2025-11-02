@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import SearchBar from '../components/SearchBar';
+import DestinationSection from '../components/DestinationSection';
 import AuthModal from '../components/AuthModal';
 
 function Home() {
     const [showAuthModal, setShowAuthModal] = useState(false);
     const [authMode, setAuthMode] = useState('login');
     const [stickySearch, setStickySearch] = useState(false);
+    const [userPreferences, setUserPreferences] = useState(null);
 
     const openAuthModal = (mode) => {
         setAuthMode(mode);
@@ -20,6 +22,7 @@ function Home() {
 
     const handleSearch = (destination) => {
         console.log(`Searching for: ${destination}`);
+        // In a real app, this would trigger actual search
         alert(`Searching for destinations in ${destination}...`);
     };
 
@@ -31,6 +34,14 @@ function Home() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Load user preferences from localStorage (simulated)
+    useEffect(() => {
+        const prefs = localStorage.getItem('voyageur_preferences');
+        if (prefs) {
+            setUserPreferences(JSON.parse(prefs));
+        }
+    }, []);
+
     return (
         <div className="min-h-screen bg-white">
             <Header onOpenAuth={openAuthModal} />
@@ -40,53 +51,52 @@ function Home() {
             {/* Sticky Search Bar */}
             {stickySearch && (
                 <div className="fixed top-20 left-0 right-0 z-40 animate-slide-up bg-white/95 backdrop-blur-sm border-b border-gray-200 py-2">
-                    <div className="max-w-5xl mx-auto px-4">
+                    <div className="max-w-6xl mx-auto px-4">
                         <SearchBar compact={true} onSearch={handleSearch} />
                     </div>
                 </div>
             )}
 
-            {/* Demo Content to Enable Scrolling */}
-            <div className="container mx-auto px-4 py-16">
-                <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                        Discover Amazing Destinations
+            {/* Destination Section */}
+            <DestinationSection userPreferences={userPreferences} />
+
+            {/* Demo Content for Other Sections */}
+            <section className="py-16 bg-gray-50">
+                <div className="max-w-7xl mx-auto px-4 text-center">
+                    <h2 className="text-4xl font-bold mb-4 text-gray-800">
+                        More Amazing Features Coming Soon
                     </h2>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Your AI travel assistant will help you find the perfect destinations based on your preferences, budget, and travel style.
+                    <p className="text-xl text-gray-600 mb-8">
+                        AI-powered recommendations, smart search, and much more!
                     </p>
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                    {[1, 2, 3].map((item) => (
-                        <div key={item} className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8 text-center">
-                            <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center shadow-lg">
-                                <div className={`icon-${item === 1 ? 'zap' : item === 2 ? 'sparkles' : 'award'} text-2xl text-purple-600`}></div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                        <div className="bg-white rounded-2xl p-8 shadow-lg">
+                            <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-2xl flex items-center justify-center">
+                                <div className="icon-zap text-2xl text-purple-600"></div>
                             </div>
-                            <h3 className="text-xl font-bold mb-2">
-                                {item === 1 ? 'AI-Powered' : item === 2 ? 'Smart Matching' : 'Best Deals'}
-                            </h3>
-                            <p className="text-gray-600">
-                                {item === 1 ? 'Get personalized recommendations based on your travel history and preferences.'
-                                    : item === 2 ? 'Our AI matches you with destinations that fit your style and budget.'
-                                        : 'Find the best prices and exclusive deals tailored just for you.'}
-                            </p>
+                            <h3 className="text-xl font-bold mb-2">Smart AI</h3>
+                            <p className="text-gray-600">Intelligent recommendations based on your travel style</p>
                         </div>
-                    ))}
-                </div>
 
-                {/* More content to enable scrolling */}
-                <div className="space-y-8">
-                    {[1, 2, 3, 4].map((item) => (
-                        <div key={item} className="bg-gray-50 rounded-2xl p-8">
-                            <div className="animate-pulse">
-                                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-                                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                        <div className="bg-white rounded-2xl p-8 shadow-lg">
+                            <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-2xl flex items-center justify-center">
+                                <div className="icon-shield text-2xl text-blue-600"></div>
                             </div>
+                            <h3 className="text-xl font-bold mb-2">Best Prices</h3>
+                            <p className="text-gray-600">Price prediction and guarantee for the best deals</p>
                         </div>
-                    ))}
+
+                        <div className="bg-white rounded-2xl p-8 shadow-lg">
+                            <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-2xl flex items-center justify-center">
+                                <div className="icon-globe text-2xl text-green-600"></div>
+                            </div>
+                            <h3 className="text-xl font-bold mb-2">Global Coverage</h3>
+                            <p className="text-gray-600">150+ countries and thousands of destinations</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
 
             {showAuthModal && (
                 <AuthModal
