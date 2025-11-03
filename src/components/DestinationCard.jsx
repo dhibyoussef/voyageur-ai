@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 function DestinationCard({ destination }) {
     const [isSaved, setIsSaved] = useState(false);
-    const [viewCount, setViewCount] = useState(Math.floor(Math.random() * 500) + 100);
+    const [viewCount] = useState(Math.floor(Math.random() * 500) + 100);
     const roomsLeft = Math.floor(Math.random() * 5) + 2;
     const recentBookings = Math.floor(Math.random() * 20) + 5;
 

@@ -9,10 +9,12 @@ import HowItWorks from '../components/HowItWorks';
 import TrustIndicators from '../components/TrustIndicators';
 import Testimonials from '../components/Testimonials';
 import FAQ from '../components/FAQ';
+import NewsletterSignup from '../components/NewsletterSignup';
 import AIChatWidget from '../components/AIChatWidget';
 import BackToTop from '../components/BackToTop';
 import AuthModal from '../components/AuthModal';
-import NewsletterSignup from '../components/NewsletterSignup'; // Add this import
+import Footer from '../components/Footer';
+
 
 function Home() {
     const [showAuthModal, setShowAuthModal] = useState(false);
@@ -81,6 +83,8 @@ function Home() {
             <FAQ />
             {/* Newsletter Signup Section - Newly added */}
             <NewsletterSignup />
+            {/* Footer - Newly added */}
+            <Footer />
             {/* Auth Modal */}
             {showAuthModal && (
                 <AuthModal
