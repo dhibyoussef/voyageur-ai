@@ -6,9 +6,10 @@ import SearchBar from '../components/SearchBar';
 import SocialProof from '../components/SocialProof';
 import DestinationSection from '../components/DestinationSection';
 import HowItWorks from '../components/HowItWorks';
-import TrustIndicators from '../components/TrustIndicators'; // Add this import
+import TrustIndicators from '../components/TrustIndicators';
 import AuthModal from '../components/AuthModal';
-import Testimonials from '../components/Testimonials'; // Add this import
+import Testimonials from '../components/Testimonials';
+import AIChatWidget from '../components/AIChatWidget'; // Add this import
 
 function Home() {
     const [showAuthModal, setShowAuthModal] = useState(false);
@@ -49,19 +50,14 @@ function Home() {
         <div className="min-h-screen bg-white">
             {/* Header */}
             <Header onOpenAuth={openAuthModal} />
-
             {/* Live Statistics Bar */}
             <LiveStats />
-
             {/* Hero Section */}
             <Hero onOpenAuth={openAuthModal} />
-
             {/* Search Bar */}
             <SearchBar onSearch={handleSearch} />
-
             {/* Social Proof - Recent Bookings */}
             <SocialProof />
-
             {/* Sticky Search Bar */}
             {stickySearch && (
                 <div className="fixed top-20 left-0 right-0 z-40 animate-slide-up bg-white/95 backdrop-blur-sm border-b border-gray-200 py-2">
@@ -70,19 +66,14 @@ function Home() {
                     </div>
                 </div>
             )}
-
             {/* Destination Section */}
             <DestinationSection userPreferences={userPreferences} />
-
             {/* How It Works Section */}
             <HowItWorks />
-
             {/* Trust Indicators Section */}
             <TrustIndicators />
-            
             {/* Testimonials Section */}
             <Testimonials />
-
             {/* Auth Modal */}
             {showAuthModal && (
                 <AuthModal
@@ -91,6 +82,8 @@ function Home() {
                     onSwitchMode={handleSwitchMode}
                 />
             )}
+            {/* AI Chat Widget - Newly added component */}
+            <AIChatWidget />
         </div>
     );
 }
