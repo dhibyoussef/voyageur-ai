@@ -7,19 +7,18 @@ import SocialProof from '../components/SocialProof';
 import DestinationSection from '../components/DestinationSection';
 import HowItWorks from '../components/HowItWorks';
 import TrustIndicators from '../components/TrustIndicators';
-import AuthModal from '../components/AuthModal';
 import Testimonials from '../components/Testimonials';
+import FAQ from '../components/FAQ';
 import AIChatWidget from '../components/AIChatWidget';
 import BackToTop from '../components/BackToTop';
-import FAQ from '../components/FAQ';
-import ToastNotification from '../components/ToastNotification'; // Add this import
+import AuthModal from '../components/AuthModal';
+import NewsletterSignup from '../components/NewsletterSignup'; // Add this import
 
 function Home() {
     const [showAuthModal, setShowAuthModal] = useState(false);
     const [authMode, setAuthMode] = useState('login');
     const [stickySearch, setStickySearch] = useState(false);
     const [userPreferences, setUserPreferences] = useState(null);
-    const [toasts, setToasts] = useState([]); // Add state for toasts
 
     const openAuthModal = (mode) => {
         setAuthMode(mode);
@@ -30,19 +29,9 @@ function Home() {
         setAuthMode(mode);
     };
 
-    // Add toast functionality
-    const showToast = (message, type = 'success') => {
-        const id = Date.now();
-        setToasts(prev => [...prev, { id, message, type }]);
-    };
-
-    const removeToast = (id) => {
-        setToasts(prev => prev.filter(toast => toast.id !== id));
-    };
-
-    // Modify the search handler to show toast
     const handleSearch = (destination) => {
-        showToast(`Searching for destinations in ${destination}...`, 'info');
+        console.log(`Searching for: ${destination}`);
+        alert(`Searching for destinations in ${destination}...`);
     };
 
     useEffect(() => {
@@ -90,15 +79,8 @@ function Home() {
             <Testimonials />
             {/* FAQ Section */}
             <FAQ />
-            {/* Toast Notifications */}
-            {toasts.map(toast => (
-                <ToastNotification
-                    key={toast.id}
-                    message={toast.message}
-                    type={toast.type}
-                    onClose={() => removeToast(toast.id)}
-                />
-            ))}
+            {/* Newsletter Signup Section - Newly added */}
+            <NewsletterSignup />
             {/* Auth Modal */}
             {showAuthModal && (
                 <AuthModal
