@@ -11,6 +11,7 @@ import AuthModal from '../components/AuthModal';
 import Testimonials from '../components/Testimonials';
 import AIChatWidget from '../components/AIChatWidget'; // Add this import
 import BackToTop from '../components/BackToTop'; // Add this import
+import FAQ from '../components/FAQ';
 
 function Home() {
     const [showAuthModal, setShowAuthModal] = useState(false);
@@ -75,6 +76,8 @@ function Home() {
             <TrustIndicators />
             {/* Testimonials Section */}
             <Testimonials />
+            {/* FAQ Section - Newly added */}
+            <FAQ />
             {/* Auth Modal */}
             {showAuthModal && (
                 <AuthModal
