@@ -10,6 +10,7 @@ import TrustIndicators from '../components/TrustIndicators';
 import AuthModal from '../components/AuthModal';
 import Testimonials from '../components/Testimonials';
 import AIChatWidget from '../components/AIChatWidget'; // Add this import
+import BackToTop from '../components/BackToTop'; // Add this import
 
 function Home() {
     const [showAuthModal, setShowAuthModal] = useState(false);
@@ -84,6 +85,7 @@ function Home() {
             )}
             {/* AI Chat Widget - Newly added component */}
             <AIChatWidget />
+            <BackToTop />
         </div>
     );
 }
