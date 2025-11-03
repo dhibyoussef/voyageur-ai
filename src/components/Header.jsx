@@ -20,7 +20,7 @@ function Header({ onOpenAuth }) {
                         <div className="icon-sparkles text-xl text-white"></div>
                     </div>
                     <div>
-                        <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">Voyageur AI</span>
+                        <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">Trip Link</span>
                         <div className="text-xs text-gray-600">Intelligent Travel Companion</div>
                     </div>
                 </div>

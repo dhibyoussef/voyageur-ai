@@ -89,7 +89,7 @@ function HowItWorks() {
                         <div className="icon-sparkles text-lg mr-2 animate-pulse"></div>
                         <span className="text-sm font-semibold">AI-Powered Platform</span>
                     </div>
-                    <h2 className="text-5xl font-bold mb-4">Travel Smarter with Voyageur AI</h2>
+                    <h2 className="text-5xl font-bold mb-4">Travel Smarter with Trip Link</h2>
                     <p className="text-xl opacity-90 max-w-2xl mx-auto">
                         Experience the perfect blend of artificial intelligence and human expertise
                     </p>

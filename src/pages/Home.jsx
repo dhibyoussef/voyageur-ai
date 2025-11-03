@@ -9,15 +9,17 @@ import HowItWorks from '../components/HowItWorks';
 import TrustIndicators from '../components/TrustIndicators';
 import AuthModal from '../components/AuthModal';
 import Testimonials from '../components/Testimonials';
-import AIChatWidget from '../components/AIChatWidget'; // Add this import
-import BackToTop from '../components/BackToTop'; // Add this import
+import AIChatWidget from '../components/AIChatWidget';
+import BackToTop from '../components/BackToTop';
 import FAQ from '../components/FAQ';
+import ToastNotification from '../components/ToastNotification'; // Add this import
 
 function Home() {
     const [showAuthModal, setShowAuthModal] = useState(false);
     const [authMode, setAuthMode] = useState('login');
     const [stickySearch, setStickySearch] = useState(false);
     const [userPreferences, setUserPreferences] = useState(null);
+    const [toasts, setToasts] = useState([]); // Add state for toasts
 
     const openAuthModal = (mode) => {
         setAuthMode(mode);
@@ -28,9 +30,19 @@ function Home() {
         setAuthMode(mode);
     };
 
+    // Add toast functionality
+    const showToast = (message, type = 'success') => {
+        const id = Date.now();
+        setToasts(prev => [...prev, { id, message, type }]);
+    };
+
+    const removeToast = (id) => {
+        setToasts(prev => prev.filter(toast => toast.id !== id));
+    };
+
+    // Modify the search handler to show toast
     const handleSearch = (destination) => {
-        console.log(`Searching for: ${destination}`);
-        alert(`Searching for destinations in ${destination}...`);
+        showToast(`Searching for destinations in ${destination}...`, 'info');
     };
 
     useEffect(() => {
@@ -76,8 +88,17 @@ function Home() {
             <TrustIndicators />
             {/* Testimonials Section */}
             <Testimonials />
-            {/* FAQ Section - Newly added */}
+            {/* FAQ Section */}
             <FAQ />
+            {/* Toast Notifications */}
+            {toasts.map(toast => (
+                <ToastNotification
+                    key={toast.id}
+                    message={toast.message}
+                    type={toast.type}
+                    onClose={() => removeToast(toast.id)}
+                />
+            ))}
             {/* Auth Modal */}
             {showAuthModal && (
                 <AuthModal
@@ -86,8 +107,9 @@ function Home() {
                     onSwitchMode={handleSwitchMode}
                 />
             )}
-            {/* AI Chat Widget - Newly added component */}
+            {/* AI Chat Widget */}
             <AIChatWidget />
+            {/* Back to Top Button */}
             <BackToTop />
         </div>
     );
