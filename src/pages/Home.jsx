@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/layout_home/Header';
-import LiveStats from '../components/ui/LiveStats';
-import Hero from '../components/content/Hero';
-import SearchBar from '../components/search/SearchBar';
-import SocialProof from '../components/ui/SocialProof';
-import DestinationSection from '../components/destinations/DestinationSection';
-import HowItWorks from '../components/ai/HowItWorks';
-import TrustIndicators from '../components/ai/TrustIndicators';
-import Testimonials from '../components/content/Testimonials';
-import FAQ from '../components/content/FAQ';
-import NewsletterSignup from '../components/ui/NewsletterSignup';
-import AIChatWidget from '../components/ai/AIChatWidget';
+import Header from '../components/home/layout_home/Header';
+import LiveStats from '../components/home/ui/LiveStats';
+import Hero from '../components/home/content/Hero';
+import SearchBar from '../components/home/search/SearchBar';
+import SocialProof from '../components/home/ui/SocialProof';
+import DestinationSection from '../components/home/destinations/DestinationSection';
+import HowItWorks from '../components/home/ai/HowItWorks';
+import TrustIndicators from '../components/home/ai/TrustIndicators';
+import Testimonials from '../components/home/content/Testimonials';
+import FAQ from '../components/home/content/FAQ';
+import NewsletterSignup from '../components/home/ui/NewsletterSignup';
+import AIChatWidget from '../components/home/ai/AIChatWidget';
 import BackToTop from '../components/BackToTop';
 import AuthModal from '../components/auth/AuthModal';
-import Footer from '../components/layout_home/Footer';
+import Footer from '../components/home/layout_home/Footer';
 
 
 function Home() {
