@@ -80,6 +80,9 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
         } else {
             window.location.href = '/profile?setup=true';
         }
+        // Add this to the handleSignup function in AuthModal.jsx
+// For admin role setup (simplified version)
+
     };
 
     const handleImageUpload = (e) => {
