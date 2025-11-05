@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import PasswordReset from './PasswordReset'; // Import the PasswordReset component
 
 function AuthModal({ mode, onClose, onSwitchMode }) {
     const [step, setStep] = useState(1);
     const [showPassword, setShowPassword] = useState(false);
     const [currentImage, setCurrentImage] = useState(0);
+    const [showResetPassword, setShowResetPassword] = useState(false); // New state for password reset
+    const [resetStep, setResetStep] = useState(1); // Step in reset flow
+    const [resetEmail, setResetEmail] = useState(''); // Email for password reset
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -40,6 +44,33 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
     const handleLogin = (e) => {
         e.preventDefault();
         window.location.href = '/profile';
+    };
+
+    // New handler for forgot password
+    const handleForgotPassword = (e) => {
+        e.preventDefault();
+        setShowResetPassword(true);
+    };
+
+    // Handle password reset submission
+    const handleResetSubmit = (e) => {
+        e.preventDefault();
+        if (resetStep === 1) {
+            // In a real app, this would send email to API
+            console.log('Sending password reset email to:', resetEmail);
+            setResetStep(2); // Show success screen
+        } else {
+            // If we're on the success screen and submit again, go back
+            setResetStep(1);
+            setResetEmail('');
+        }
+    };
+
+    // Handle back button in reset flow
+    const handleResetBack = () => {
+        setResetStep(1);
+        setResetEmail('');
+        setShowResetPassword(false);
     };
 
     const handleSignup = (e) => {
@@ -85,6 +116,21 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
         }));
     };
 
+    // If we're showing the password reset form, render it instead of the auth modal
+    if (showResetPassword) {
+        return (
+            <PasswordReset
+                step={resetStep}
+                email={resetEmail}
+                setEmail={setResetEmail}
+                onSubmit={handleResetSubmit}
+                onBack={handleResetBack}
+                onClose={onClose}
+            />
+        );
+    }
+
+    // Rest of the AuthModal component remains the same
     return (
         <div
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm animate-slide-up"
@@ -100,8 +146,6 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                 >
                     <div className="icon-x text-lg text-gray-600"></div>
                 </button>
-
-                {/* Left Side - Image Carousel */}
                 <div className="hidden md:block w-1/2 relative overflow-hidden">
                     {heroImages.map((img, idx) => (
                         <div
@@ -139,7 +183,6 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                         </div>
                     </div>
                 </div>
-
                 <div className="w-full md:w-1/2 p-10 overflow-y-auto max-h-[90vh] bg-gradient-to-br from-purple-50 to-blue-50">
                     {mode === 'login' ? (
                         <div>
@@ -150,7 +193,6 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                             </div>
                             <h2 className="text-2xl font-bold mb-2 text-center">Sign In</h2>
                             <p className="text-gray-600 mb-4 text-center">Welcome back to your travel dashboard</p>
-
                             <div className="flex items-center justify-center space-x-4 mb-6 text-sm text-gray-500">
                                 <div className="flex items-center space-x-1">
                                     <div className="icon-shield-check text-green-600"></div>
@@ -165,25 +207,21 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                                     <span>500K+ users</span>
                                 </div>
                             </div>
-
                             <div className="space-y-3 mb-6">
                                 <button className="w-full py-3 border border-gray-300 rounded-lg flex items-center justify-center space-x-2 hover:bg-gray-50 transition-all hover:shadow-md">
-                                    <span className="text-xl">
-                                      {/* Google "G" Icon */}
-                                      <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                                        <g>
-                                          <path fill="#4285F4" d="M43.611 20.083h-18.26v7.917h10.436c-1.19 4.167-5.002 7.084-10.436 7.084-6.271 0-11.364-5.094-11.364-11.417S18.08 12.25 24.352 12.25c2.85 0 5.248 1.016 7.175 2.692l5.65-5.733C33.899 6.388 29.435 4.667 24.352 4.667 13.467 4.667 4.36 13.767 4.36 24.75s9.107 20.083 20.093 20.083c9.801 0 18.053-6.979 18.053-17.084 0-1.136-.122-2.021-.269-2.875z"/>
-                                          <path fill="#34A853" d="M6.334 13.104l6.537 4.812c1.758-3.208 5.095-5.667 11.483-5.667 2.88 0 5.243 1.009 7.185 2.701l5.658-5.74c-3.163-2.938-7.699-4.72-12.843-4.72C16.11 4.49 9.354 8.804 6.334 13.104z"/>
-                                          <path fill="#FBBC05" d="M24.352 44.833c6.073 0 10.956-1.988 14.609-5.449l-6.77-5.517c-1.874 1.531-4.425 2.581-7.839 2.581-6.06 0-11.189-4.127-13.06-9.584l-6.764 5.28c3.923 6.098 11.314 12.689 20.824 12.689z"/>
-                                          <path fill="#EA4335" d="M43.61 20.083h-18.26v7.917h10.436c-0.483 1.692-1.615 3.375-3.224 4.708l.002.002 6.77 5.519C43.322 34.093 45.36 28.284 45.36 24.75c0-1.19-.151-2.429-.339-2.896z"/>
-                                        </g>
-                                      </svg>
-                                    </span>
+                  <span className="text-xl">
+                    <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                      <g>
+                        <path fill="#4285F4" d="M43.611 20.083h-18.26v7.917h10.436c-1.19 4.167-5.002 7.084-10.436 7.084-6.271 0-11.364-5.094-11.364-11.417S18.08 12.25 24.352 12.25c2.85 0 5.248 1.016 7.175 2.692l5.65-5.733C33.899 6.388 29.435 4.667 24.352 4.667 13.467 4.667 4.36 13.767 4.36 24.75s9.107 20.083 20.093 20.083c9.801 0 18.053-6.979 18.053-17.084 0-1.136-.122-2.021-.269-2.875z"/>
+                        <path fill="#34A853" d="M6.334 13.104l6.537 4.812c1.758-3.208 5.095-5.667 11.483-5.667 2.88 0 5.243 1.009 7.185 2.701l5.658-5.74c-3.163-2.938-7.699-4.72-12.843-4.72C16.11 4.49 9.354 8.804 6.334 13.104z"/>
+                        <path fill="#FBBC05" d="M24.352 44.833c6.073 0 10.956-1.988 14.609-5.449l-6.77-5.517c-1.874 1.531-4.425 2.581-7.839 2.581-6.06 0-11.189-4.127-13.06-9.584l-6.764 5.28c3.923 6.098 11.314 12.689 20.824 12.689z"/>
+                        <path fill="#EA4335" d="M43.61 20.083h-18.26v7.917h10.436c-0.483 1.692-1.615 3.375-3.224 4.708l.002.002 6.77 5.519C43.322 34.093 45.36 28.284 45.36 24.75c0-1.19-.151-2.429-.339-2.896z"/>
+                      </g>
+                    </svg>
+                  </span>
                                     <span className="font-medium">Continue with Google</span>
                                 </button>
-
                             </div>
-
                             <div className="relative mb-6">
                                 <div className="absolute inset-0 flex items-center">
                                     <div className="w-full border-t border-gray-300"></div>
@@ -192,7 +230,6 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                                     <span className="px-2 bg-white text-gray-500">Or continue with email</span>
                                 </div>
                             </div>
-
                             <form onSubmit={handleLogin} className="space-y-5">
                                 <div>
                                     <label className="block text-sm font-semibold mb-2 text-gray-700">Email Address</label>
@@ -229,6 +266,15 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                                         </button>
                                     </div>
                                 </div>
+                                <div className="flex items-center justify-end mb-4">
+                                    <button
+                                        type="button"
+                                        onClick={handleForgotPassword}
+                                        className="text-sm text-primary hover:underline font-medium"
+                                    >
+                                        Forgot password?
+                                    </button>
+                                </div>
                                 <button
                                     type="submit"
                                     className="w-full py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-lg hover:opacity-90 font-semibold shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02] flex items-center justify-center space-x-2 animate-glow"
@@ -251,7 +297,6 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                         <div>
                             <h2 className="text-2xl font-bold mb-2">Create Account</h2>
                             <p className="text-gray-600 mb-2">Join thousands of happy travelers</p>
-
                             <div className="flex items-center justify-center space-x-4 mb-4 text-xs text-gray-500">
                                 <div className="flex items-center space-x-1">
                                     <div className="icon-check text-green-600"></div>
@@ -266,12 +311,11 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                                     <span>20% off first booking</span>
                                 </div>
                             </div>
-
                             <div className="flex justify-center mb-6">
                                 {[1, 2, 3].map(s => (
                                     <div key={s} className="flex items-center">
                                         <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm ${
-                                            s <= step ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'
+                                            s <= step ? 'bg-primary text-white' : 'bg-gray-300'
                                         }`}>
                                             {s}
                                         </div>
@@ -279,7 +323,6 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                                     </div>
                                 ))}
                             </div>
-
                             <form onSubmit={handleSignup}>
                                 {step === 1 && (
                                     <div className="space-y-5 animate-slide-up">
@@ -319,7 +362,6 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                                         </div>
                                     </div>
                                 )}
-
                                 {step === 2 && (
                                     <div className="space-y-5 animate-slide-up">
                                         <h3 className="text-2xl font-bold mb-4 text-gray-800">Personal Info & Profile</h3>
@@ -385,7 +427,6 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                                         </div>
                                     </div>
                                 )}
-
                                 {step === 3 && (
                                     <div className="space-y-6 animate-slide-up">
                                         <h3 className="text-2xl font-bold mb-4 text-gray-800">Travel Preferences</h3>
@@ -433,7 +474,6 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                                         </div>
                                     </div>
                                 )}
-
                                 <button
                                     type="submit"
                                     className="w-full mt-6 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-lg hover:opacity-90 font-semibold shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02] flex items-center justify-center space-x-2"
@@ -442,7 +482,6 @@ function AuthModal({ mode, onClose, onSwitchMode }) {
                                     <div className="icon-arrow-right text-base"></div>
                                 </button>
                             </form>
-
                             <p className="mt-4 text-center text-sm">
                                 Already have an account?
                                 <button
