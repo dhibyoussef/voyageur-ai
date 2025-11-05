@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
-import LiveStats from '../components/LiveStats';
-import Hero from '../components/Hero';
-import SearchBar from '../components/SearchBar';
-import SocialProof from '../components/SocialProof';
-import DestinationSection from '../components/DestinationSection';
-import HowItWorks from '../components/HowItWorks';
-import TrustIndicators from '../components/TrustIndicators';
-import Testimonials from '../components/Testimonials';
-import FAQ from '../components/FAQ';
-import NewsletterSignup from '../components/NewsletterSignup';
-import AIChatWidget from '../components/AIChatWidget';
+import Header from '../components/layout_home/Header';
+import LiveStats from '../components/ui/LiveStats';
+import Hero from '../components/content/Hero';
+import SearchBar from '../components/search/SearchBar';
+import SocialProof from '../components/ui/SocialProof';
+import DestinationSection from '../components/destinations/DestinationSection';
+import HowItWorks from '../components/ai/HowItWorks';
+import TrustIndicators from '../components/ai/TrustIndicators';
+import Testimonials from '../components/content/Testimonials';
+import FAQ from '../components/content/FAQ';
+import NewsletterSignup from '../components/ui/NewsletterSignup';
+import AIChatWidget from '../components/ai/AIChatWidget';
 import BackToTop from '../components/BackToTop';
-import AuthModal from '../components/AuthModal';
-import Footer from '../components/Footer';
+import AuthModal from '../components/auth/AuthModal';
+import Footer from '../components/layout_home/Footer';
 
 
 function Home() {

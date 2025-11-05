@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import ErrorBoundary from './components/ErrorBoundary';
+import ErrorBoundary from './components/layout_home/ErrorBoundary';
 import './index.css';
 
 function App() {

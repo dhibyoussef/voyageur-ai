@@ -26,7 +26,7 @@ function Header({ onOpenAuth }) {
                 </div>
 
                 <div className="hidden md:flex items-center space-x-8">
-                    <a href="/" className="text-gray-800 hover:text-primary transition flex items-center space-x-1">
+                    <a href="/public" className="text-gray-800 hover:text-primary transition flex items-center space-x-1">
                         <div className="icon-home text-base"></div>
                         <span>Home</span>
                     </a>
@@ -64,7 +64,7 @@ function Header({ onOpenAuth }) {
             {/* Mobile Menu */}
             {mobileMenuOpen && (
                 <div className="md:hidden bg-white border-t border-gray-200 py-4 px-4 space-y-3 animate-slide-up">
-                    <a href="/" className="block py-2 text-gray-800 hover:text-primary transition flex items-center space-x-2">
+                    <a href="/public" className="block py-2 text-gray-800 hover:text-primary transition flex items-center space-x-2">
                         <div className="icon-home text-base"></div>
                         <span>Home</span>
                     </a>
